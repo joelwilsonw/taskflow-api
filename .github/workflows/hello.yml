@@ -1,4 +1,32 @@
-name: Hello World Workflow
+name: Hello World ?Workflow
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  greet:
+    name: Say Hello
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Greeting
+        run: |
+          echo "Hello from GitHub Actions!"
+          echo "Workflow triggered by: ${{ github.actor }}"
+
+      - name: Show Event Info
+        run: |
+          echo "Event: ${{ github.event_name }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit SHA: ${{ github.sha }}"
+          echo "Repository: ${{ github.repository }}"
+
+      - name: Show Runner Info
+        run: |
+          echo "Runner OS: ${{ runner.os }}"
+          echo "Runner arch: ${{ runner.arch }}"
+          uname -aname: Hello World Workflow
 
 on:
   push:
