@@ -1,0 +1,38 @@
+name: Runner Types Demo
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+
+  ubuntu-runner:
+    name: Ubuntu Runner
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show Ubuntu Info
+        run: |
+          echo "Running on Ubuntu"
+          uname -a
+          lsb_release -a || cat /etc/os-release
+
+  windows-runner:
+    name: Windows Runner
+    runs-on: windows-latest
+
+    steps:
+      - name: Show Windows Info
+        run: |
+          echo "Running on Windows"
+          systeminfo
+
+  macos-runner:
+    name: macOS Runner
+    runs-on: macos-latest
+
+    steps:
+      - name: Show macOS Info
+        run: |
+          echo "Running on macOS"
+          sw_vers
