@@ -1,0 +1,42 @@
+name: Workflow Structure Demo
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+
+  setup:
+    name: Setup Job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Setup Message
+        run: echo "Setup completed"
+
+  build:
+    name: Build Job
+    runs-on: ubuntu-latest
+    needs: setup
+
+    steps:
+      - name: Simulate Build
+        run: echo "Building the application..."
+
+  test:
+    name: Test Job
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Run Tests
+        run: echo "Running tests..."
+
+  deploy:
+    name: Deploy Job
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Deploy App
+        run: echo "Deploying application..."
