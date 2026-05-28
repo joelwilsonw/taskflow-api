@@ -1,0 +1,33 @@
+name: Smart Trigger Workflow
+
+on:
+
+  push:
+    branches:
+      - main
+      - develop
+
+    paths:
+      - "src/**"
+      - ".github/workflows/**"
+
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+
+  trigger-demo:
+    name: Trigger Demo
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Show Trigger Info
+        run: |
+          echo "Workflow triggered!"
+          echo "Event: ${{ github.event_name }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Actor: ${{ github.actor }}"
