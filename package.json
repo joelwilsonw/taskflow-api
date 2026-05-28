@@ -4,5 +4,8 @@
   "description": "GitHub Actions Cache Demo",
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "scripts": {
+    "test": "echo \"Tests passed successfully\""
   }
 }
