@@ -1,0 +1,39 @@
+name: Pipeline Demo
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build Step
+        run: |
+          echo "Building application..."
+          sleep 5
+          echo "Build completed"
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test Step
+        run: |
+          echo "Running tests..."
+          sleep 5
+          echo "Tests passed"
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy Step
+        run: |
+          echo "Deploying application..."
+          sleep 5
+          echo "Deployment successful"
