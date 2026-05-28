@@ -1,0 +1,21 @@
+name: Scheduled Workflow
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+  workflow_dispatch:
+
+jobs:
+  scheduled-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show Date and Time
+        run: |
+          echo "Workflow executed at:"
+          date
+
+      - name: Print Scheduled Message
+        run: |
+          echo "This workflow runs automatically every 5 minutes."
