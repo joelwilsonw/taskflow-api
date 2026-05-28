@@ -1,0 +1,11 @@
+name: PR Quality Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  test:
+    uses: ./.github/workflows/reusable-test.yml
