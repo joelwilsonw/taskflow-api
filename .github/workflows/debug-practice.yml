@@ -1,0 +1,53 @@
+name: Debug Practice
+
+on:
+  workflow_dispatch:
+    inputs:
+      scenario:
+        description: 'Which bug scenario to test'
+        required: true
+        type: choice
+        options:
+          - all-pass
+          - missing-dependency
+          - wrong-env-var
+          - exit-code-failure
+          - timeout
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    steps:
+      - name: Debug Context
+        run: |
+          echo "Scenario: ${{ inputs.scenario }}"
+          echo "Runner OS: $(uname -a)"
+
+      - name: Missing Dependency
+        if: inputs.scenario == 'missing-dependency'
+        run: nonexistent-tool --version
+
+      - name: Wrong Env Var
+        if: inputs.scenario == 'wrong-env-var'
+        run: |
+          node -e "if(!process.env.DATABASE_URL) throw new Error('DATABASE_URL missing')"
+
+      - name: Exit Code Failure
+        if: inputs.scenario == 'exit-code-failure'
+        run: exit 42
+
+      - name: Timeout
+        if: inputs.scenario == 'timeout'
+        run: sleep 300
+
+      - name: All Pass
+        if: inputs.scenario == 'all-pass'
+        run: echo "Everything works"
+
+      - name: Diagnostics
+        if: failure()
+        run: |
+          echo "Failure detected"
+          ls -la
