@@ -1,0 +1,26 @@
+name: OIDC Demo
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  inspect-oidc-token:
+    name: Inspect OIDC JWT
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Fetch OIDC token and inspect claims
+        run: |
+          OIDC_TOKEN=$(curl -s \
+            -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=sts.amazonaws.com" \
+            | jq -r '.value')
+
+          PAYLOAD=$(echo "$OIDC_TOKEN" | cut -d. -f2 | base64 -d 2>/dev/null)
+
+          echo "=== OIDC Token Claims ==="
+          echo "$PAYLOAD" | jq .
