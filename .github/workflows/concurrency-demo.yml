@@ -1,0 +1,19 @@
+name: Concurrency Demo
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: demo-group
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Wait
+        run: sleep 60
+
+      - name: Complete
+        run: echo "Workflow finished"
