@@ -1,0 +1,24 @@
+name: Outputs Demo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    outputs:
+      message: ${{ steps.setmsg.outputs.message }}
+
+    steps:
+      - name: Set output
+        id: setmsg
+        run: echo "message=Hello from Build Job" >> $GITHUB_OUTPUT
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show output
+        run: echo "${{ needs.build.outputs.message }}"
