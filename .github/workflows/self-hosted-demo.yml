@@ -1,0 +1,16 @@
+name: Self Hosted Runner Demo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: self-hosted
+
+    steps:
+      - name: Show machine info
+        run: |
+          echo "Running on self-hosted runner"
+          hostname
+          pwd
+          uname -a
