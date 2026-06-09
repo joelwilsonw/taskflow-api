@@ -1,0 +1,18 @@
+name: Production Failure Demo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Start Deployment
+        run: echo "Deploying application..."
+
+      - name: Simulate Production Failure
+        run: exit 1
+
+      - name: Success Message
+        run: echo "Deployment completed successfully"
