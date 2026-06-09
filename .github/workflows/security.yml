@@ -1,0 +1,20 @@
+name: Security Scan
+
+on:
+  workflow_dispatch:
+
+jobs:
+  security-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Search for hardcoded passwords
+        run: |
+          if grep -R "password" .; then
+            echo "Potential secret found"
+          else
+            echo "No obvious secrets found"
+          fi
