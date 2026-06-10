@@ -1,0 +1,13 @@
+name: Environment Protection Demo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Deploy Application
+        run: echo "Deploying to production..."
